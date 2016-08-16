@@ -11,6 +11,10 @@ MongoClient.connect(DB_URL, (err, db) => {
   if (err) throw err;
   const urls = db.collection('urls');
 
+  app.get('/', (req, res) => {
+    res.send('/new/:url to create');
+  });
+
   app.get('/new/:url*', (req, res) => {
     const fullUrl = req.url.slice(5);
     if (!validator.isURL(fullUrl)) return res.json({ error: 'Not valud URL' });
